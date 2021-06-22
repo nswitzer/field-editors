@@ -18,6 +18,8 @@ import { createBoldPlugin, withBoldOptions } from './plugins/Bold';
 import { withCodeOptions, createCodePlugin } from './plugins/Code';
 import { withItalicOptions, createItalicPlugin } from './plugins/Italic';
 import { createUnderlinePlugin, withUnderlineOptions } from './plugins/Underline';
+import { withTableOptions } from './plugins/Table';
+import { createTablePlugin } from '@udecode/slate-plugins-table';
 
 type ConnectedProps = {
   editorId?: string;
@@ -40,6 +42,7 @@ const plugins = [
   createListPlugin(),
   createHrPlugin(),
   createHeadingPlugin(),
+  createTablePlugin(),
 
   // Marks
   createBoldPlugin(),
@@ -53,6 +56,7 @@ const options = {
   ...withListOptions,
   ...withHrOptions,
   ...withHeadingOptions,
+  ...withTableOptions,
 
   // Marks
   ...withBoldOptions,
@@ -63,7 +67,102 @@ const options = {
 
 const ConnectedRichTextEditor = (props: ConnectedProps) => {
   const document = toSlatejsDocument({
-    document: props.value || Contentful.EMPTY_DOCUMENT,
+    document: {
+      "nodeType": Contentful.BLOCKS.DOCUMENT,
+      data: {},
+      content: [
+        {
+          "nodeType": Contentful.BLOCKS.TABLE,
+          "data": {},
+          "content": [
+            {
+              "nodeType": Contentful.BLOCKS.TABLE_ROW,
+              "data": {},
+              "content": [
+                {
+                  "nodeType": Contentful.BLOCKS.TABLE_CELL,
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": Contentful.BLOCKS.PARAGRAPH,
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "hello",
+                          "data": {},
+                          "marks": []
+                        }
+                      ]
+                    },
+                  ],
+                },
+                {
+                  "nodeType": Contentful.BLOCKS.TABLE_CELL,
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": Contentful.BLOCKS.PARAGRAPH,
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "world",
+                          "data": {},
+                          "marks": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "nodeType": Contentful.BLOCKS.TABLE_ROW,
+              "data": {},
+              "content": [
+                {
+                  "nodeType": Contentful.BLOCKS.TABLE_CELL,
+                  "data": {},
+                  "content": [
+                    {
+                      "nodeType": Contentful.BLOCKS.PARAGRAPH,
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "otter",
+                          "data": {},
+                          "marks": []
+                        }
+                      ]
+                    },
+                  ],
+                },
+                {
+                  "nodeType": Contentful.BLOCKS.TABLE_CELL,
+                  "data": {},
+                  "content": [
+                  {
+                      "nodeType": Contentful.BLOCKS.PARAGRAPH,
+                      "data": {},
+                      "content": [
+                        {
+                          "nodeType": "text",
+                          "value": "bear",
+                          "data": {},
+                          "marks": []
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+    },
     schema,
   });
 
