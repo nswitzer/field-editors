@@ -15,8 +15,10 @@ import {
   SlatePlugin,
   getRenderElement,
   SPEditor,
+  getSlatePluginOptions,
+  DeserializeNode,
 } from '@udecode/slate-plugins-core';
-import { insertNodes, setNodes, toggleNodeType } from '@udecode/slate-plugins-common';
+import { getElementDeserializer, insertNodes, setNodes, toggleNodeType } from '@udecode/slate-plugins-common';
 import { CustomElement, CustomSlatePluginOptions } from '../../types';
 import { getElementFromCurrentSelection, hasSelectionText } from '../../helpers/editor';
 
@@ -239,6 +241,20 @@ export function createHeadingPlugin(): SlatePlugin {
     renderElement: getRenderElement(headings),
     pluginKeys: headings,
     onKeyDown: withHeadingEvents,
+    deserialize: (editor) => {
+      return {
+        element: headings.reduce((deserializers, heading, i) => {
+          const options = getSlatePluginOptions(editor, heading);
+          const nodeNames = `H${i + 1}`;
+          const deserializer = getElementDeserializer({
+            type: options.type,
+            rules: [{ nodeNames }],
+            ...options.deserialize,
+          });
+          return deserializers.concat(deserializer);
+          }, [] as DeserializeNode[]),
+      };
+    }
   };
 }
 
