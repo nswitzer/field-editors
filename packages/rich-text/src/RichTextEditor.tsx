@@ -9,7 +9,7 @@ import schema from './constants/Schema';
 import deepEquals from 'fast-deep-equal';
 import Toolbar from './Toolbar';
 import StickyToolbarWrapper from './Toolbar/StickyToolbarWrapper';
-import { Plate } from '@udecode/plate';
+import { Plate, PlateEditor } from '@udecode/plate';
 import { SdkProvider } from './SdkProvider';
 import {
   RichTextTrackingActionHandler,
@@ -32,6 +32,7 @@ type ConnectedProps = {
   onChange?: (doc: Contentful.Document) => unknown;
   isToolbarHidden?: boolean;
   actionsDisabled?: boolean;
+  editor?: PlateEditor;
 };
 
 export const ConnectedRichTextEditor = (props: ConnectedProps) => {
@@ -59,11 +60,14 @@ export const ConnectedRichTextEditor = (props: ConnectedProps) => {
     <div className={styles.root} data-test-id="rich-text-editor">
       <Plate
         id={getContentfulEditorId(props.sdk)}
+        editor={props.editor}
         initialValue={value}
         plugins={plugins}
         editableProps={{
           className: classNames,
           readOnly: props.isDisabled,
+          // @ts-expect-error needed for slate-test-utils
+          'data-testid': 'slate-content-editable',
         }}
         onChange={(newValue) => {
           const slateDoc = sanitizeSlateDoc(newValue as TextOrCustomElement[]);
