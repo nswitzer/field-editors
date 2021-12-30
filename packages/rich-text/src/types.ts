@@ -2,7 +2,7 @@ import { MARKS } from '@contentful/rich-text-types';
 import { PlatePlugin } from '@udecode/plate-core';
 import { RenderElementProps } from 'slate-react';
 
-import type { SoftBreakRule, ExitBreakRule } from './plugins/Break';
+import type { SoftBreakRule, ExitBreakRule, ResetNodePluginRule } from './plugins/Break';
 import type { NormalizerRule } from './plugins/Normalizer';
 
 export type CustomText = {
@@ -49,4 +49,9 @@ export interface RichTextPlugin extends PlatePlugin {
    * @see createNormalizerPlugin
    */
   normalizer?: NormalizerRule[];
+
+  /**
+   * @see createResetNodePlugin
+   */
+  resetNode?: ResetNodePluginRule[];
 }

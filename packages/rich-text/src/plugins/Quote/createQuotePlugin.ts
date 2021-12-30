@@ -1,5 +1,5 @@
 import { BLOCKS, CONTAINERS } from '@contentful/rich-text-types';
-import { onKeyDownToggleElement } from '@udecode/plate-core';
+import { isBlockAboveEmpty, onKeyDownToggleElement } from '@udecode/plate-core';
 
 import { transformLift } from '../../helpers/transformers';
 import { RichTextPlugin } from '../../types';
@@ -28,6 +28,13 @@ export function createQuotePlugin(): RichTextPlugin {
       {
         validChildren: CONTAINERS[BLOCKS.QUOTE],
         transform: transformLift,
+      },
+    ],
+    resetNode: [
+      {
+        hotkey: 'Enter',
+        predicate: isBlockAboveEmpty,
+        types: [BLOCKS.QUOTE],
       },
     ],
   };

@@ -5226,7 +5226,7 @@
   dependencies:
     "@udecode/plate-core" "9.0.0"
 
-"@udecode/plate-reset-node@9.0.0":
+"@udecode/plate-reset-node@9.0.0", "@udecode/plate-reset-node@^9.0.0":
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/@udecode/plate-reset-node/-/plate-reset-node-9.0.0.tgz#b1bdee8fda108fabb5fa5a0eb64b46e997b47bc7"
   integrity sha512-xE96VUIprwXwzWX8h2/vtZHQjpRI9y+VXSZZFKGr/q96wxOhiE7RWDVLw+wRAESShm8gApkDN40PKn4z1qXBgQ==
