@@ -27,6 +27,8 @@ const MARK_TAGS = {
   em: MARKS.ITALIC,
   i: MARKS.ITALIC,
   u: MARKS.UNDERLINE,
+  sub: 'subscript',
+  sup: 'superscript',
   code: MARKS.CODE,
 };
 
@@ -43,6 +45,14 @@ const isGoogleItalic = (el) => {
 
 const isGoogleUnderline = (el) => {
   return el.style.textDecoration === 'underline';
+};
+
+const isGoogleSubscript = (el) => {
+  return el.style.verticalAlign === 'sub';
+};
+
+const isGoogleSuperscript = (el) => {
+  return el.style.verticalAlign === 'super';
 };
 
 const gDocsRules = {
@@ -70,6 +80,12 @@ const gDocsRules = {
       }
       if (isGoogleUnderline(el)) {
         marks.push(MARKS.UNDERLINE);
+      }
+      if (isGoogleSubscript(el)) {
+        marks.push('subscript');
+      }
+      if (isGoogleSuperscript(el)) {
+        marks.push('superscript');
       }
 
       const textNode = {

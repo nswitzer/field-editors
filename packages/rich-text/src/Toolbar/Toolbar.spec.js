@@ -41,6 +41,8 @@ describe('Toolbar', () => {
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-italic"]`)).toBe(true);
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-code"]`)).toBe(true);
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-underline"]`)).toBe(true);
+    expect(toolbar.exists(`[data-test-id="toolbar-toggle-superscript"]`)).toBe(true);
+    expect(toolbar.exists(`[data-test-id="toolbar-toggle-subscript"]`)).toBe(true);
 
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-hyperlink"]`)).toBe(true);
 
@@ -69,6 +71,8 @@ describe('Toolbar', () => {
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-italic"]`)).toBe(false);
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-code"]`)).toBe(false);
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-underline"]`)).toBe(false);
+    expect(toolbar.exists(`[data-test-id="toolbar-toggle-superscript"]`)).toBe(false);
+    expect(toolbar.exists(`[data-test-id="toolbar-toggle-subscript"]`)).toBe(false);
 
     expect(toolbar.exists(`[data-test-id="toolbar-toggle-hyperlink"]`)).toBe(false);
 

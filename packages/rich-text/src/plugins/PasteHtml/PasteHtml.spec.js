@@ -45,6 +45,8 @@ describe('PasteHtml Plugin', () => {
     ['supports italic i', '<i>Text</i>', markDocFactory(MARKS.ITALIC)],
     ['supports italic em', '<em>Text</em>', markDocFactory(MARKS.ITALIC)],
     ['supports underline', '<u>Text</u>', markDocFactory(MARKS.UNDERLINE)],
+    ['supports superscript', '<sup>Text</sup>', markDocFactory('superscript')],
+    ['supports subscript', '<sub>Text</sub>', markDocFactory('subscript')],
     ['supports code', '<code>Text</code>', markDocFactory(MARKS.CODE)],
     ...[1, 2, 3, 4, 5, 6].map(headingTestDataFactory),
     [
@@ -195,6 +197,30 @@ describe('PasteHtml Plugin', () => {
             leaf('Damen', mark(MARKS.BOLD), mark(MARKS.ITALIC)),
             leaf(' und Herren')
           )
+        )
+      ),
+    ]),
+    gDocFactory([
+      'superscript',
+      `<meta charset='utf-8'><meta charset="utf-8"><b style="font-weight:normal;" id="docs-internal-guid-superscript"><span style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Sehr geehrte </span><span style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:super;white-space:pre;white-space:pre-wrap;">Damen</span><span style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"> und Herren</span></b>`,
+      document(
+        {},
+        block(
+          BLOCKS.PARAGRAPH,
+          {},
+          text({}, leaf('Sehr geehrte '), leaf('Damen', mark('superscript')), leaf(' und Herren'))
+        )
+      ),
+    ]),
+    gDocFactory([
+      'subscript',
+      `<meta charset='utf-8'><meta charset="utf-8"><b style="font-weight:normal;" id="docs-internal-guid-subscript"><span style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;">Sehr geehrte </span><span style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:sub;white-space:pre;white-space:pre-wrap;">Damen</span><span style="font-size:11pt;font-family:Arial;color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre;white-space:pre-wrap;"> und Herren</span></b>`,
+      document(
+        {},
+        block(
+          BLOCKS.PARAGRAPH,
+          {},
+          text({}, leaf('Sehr geehrte '), leaf('Damen', mark('subscript')), leaf(' und Herren'))
         )
       ),
     ]),
